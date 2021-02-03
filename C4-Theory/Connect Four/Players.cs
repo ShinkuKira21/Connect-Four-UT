@@ -2,7 +2,7 @@ using System;
 
 namespace Connect_Four
 {
-    class Players
+    public class Players
     {
         protected string[] playerNames;
         protected char p1Icon;
@@ -17,7 +17,7 @@ namespace Connect_Four
         { playerNames[sel] = playerName; }
 
         public void SetPlayerIcon(char p1Icon)
-        { this.p1Icon; }
+        { this.p1Icon = p1Icon; }
 
         public string GetPlayerName(int sel)
         { return playerNames[sel]; }
