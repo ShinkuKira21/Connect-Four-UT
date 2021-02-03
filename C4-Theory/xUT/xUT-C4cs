@@ -1,0 +1,29 @@
+using System;
+using Xunit;
+
+namespace xUT
+{
+    public class xUTPlayer
+    {
+        protected string[] names =
+        { "John", "Mary" };
+        protected Connect_Four::Players play;
+
+        [Fact]
+        public void PlayerTest()
+        {
+            play = new Connect_Four::Players(names, p1Icon);
+        }
+
+       
+    }
+
+    public class xUTGrid
+    {
+        [Fact]
+        public void GridTest()
+        {
+            
+        }
+    }
+}
