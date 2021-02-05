@@ -9,7 +9,11 @@ namespace Connect_Four
         
         public Players(string[] playerNames, char p1Icon)
         {
-            this.playerNames = playerNames;
+            this.playerNames = new string[2];
+
+            for (int i = 0; i < 2; i++)
+                this.playerNames[i] = playerNames[i];
+
             this.p1Icon = p1Icon;
         }
 
@@ -22,7 +26,7 @@ namespace Connect_Four
         public string GetPlayerName(int sel)
         { return playerNames[sel]; }
 
-        public char GetP1Icon()
+        public char GetPlayerIcon()
         { return p1Icon; }
     }
 }

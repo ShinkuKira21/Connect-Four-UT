@@ -13,8 +13,29 @@ namespace xUT
         [Fact]
         public void PlayerTest()
         {
-          //  play = new Connect_Four::Players(names, p1Icon);
-            Assert.Equal(2, 2);
+            play = new Players(names, 'O');
+
+            for(int i = 0; i < 2; i++)
+                Assert.Equal(names[i], play.GetPlayerName(i));
+
+            Assert.Equal('O', play.GetPlayerIcon());
+        }
+
+        [Fact]
+        public void PlayerEditTest()
+        {
+            play = new Players(names, 'O');
+
+            // inverted names
+            play.SetPlayerName("Mary", 0);
+            play.SetPlayerName("John", 1);
+            play.SetPlayerIcon('X');
+
+            for (int i = 0; i < 2; i++)
+                Assert.NotEqual(names[i], play.GetPlayerName(i));
+
+            Assert.Equal('X', play.GetPlayerIcon());
+
         }
     }
 
