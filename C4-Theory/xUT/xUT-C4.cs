@@ -65,7 +65,11 @@ namespace xUT
              * -   -   -   -   
              */
 
-            string idealGrid = "0   1   2   3    \n-   -   -   -   \n-   -   -   -   \n-   -   -   -   \n-   -   -   -   \n";
+            string idealGrid = "0   1   2   3   "
+                + "\n-   -   -   -   " 
+                + "\n-   -   -   -   "
+                + "\n-   -   -   -   "
+                + "\n-   -   -   -   \n";
 
             return idealGrid;
         }
