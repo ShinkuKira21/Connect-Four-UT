@@ -40,10 +40,34 @@ namespace xUT
 
     public class xUTGrid
     {
+       protected string[] names =
+       { "John", "Mary" };
+
+        protected Players play;
+        protected Grid grid;
+
         [Fact]
         public void GridSetupTest()
         {
-            
+            play = new Players(names, 'O');
+            grid = new Grid(ref play, 4, gridIcon: '-');
+
+            Assert.Equal(IdealGrid(), grid.OutputGrid());
+        }
+
+        string IdealGrid()
+        {
+            /* EXPECTED OUTPUT:
+             * 0   1   2   3   
+             * -   -   -   -   
+             * -   -   -   -   
+             * -   -   -   -   
+             * -   -   -   -   
+             */
+
+            string idealGrid = "0   1   2   3    \n-   -   -   -   \n-   -   -   -   \n-   -   -   -   \n-   -   -   -   \n";
+
+            return idealGrid;
         }
     }
 }
