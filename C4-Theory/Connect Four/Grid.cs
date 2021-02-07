@@ -4,27 +4,38 @@ namespace Connect_Four
 {
     public class Grid
     {
+        protected Players players;
         protected char[][] grid;
         int x, y; // Grid size
         char gridIcon;
 
         // default: 3 x 3 | Icon: .
-        public Grid()
+        public Grid(ref Players players)
         {
-            x = 3;
-            y = 3;
+            this.players = players;
+
+            x = 4;
+            y = 4;
 
             gridIcon = '.';
+
+            InitialiseGrid();
         }
 
         // default: ySize: -1 (Sets y to x) Icon: .
-        public Grid(int xSize, int ySize = -1, char gridIcon = '.')
+        public Grid(ref Players players, int xSize, int ySize = -1, char gridIcon = '.')
         {
-            if(CheckSizes(xSize, ref ySize))
-                { x = xSize; y = ySize; } 
+            this.players = players;
+
+            if (CheckSizes(xSize, ref ySize))
+            { x = xSize; y = ySize; }
+
+            else { x = 4; y = 4; }
 
             if(CheckIcon(gridIcon))
                 this.gridIcon = gridIcon;
+
+            InitialiseGrid();
         }
 
         public char GetGridIcon()
@@ -35,8 +46,10 @@ namespace Connect_Four
         {
             string gridOutput = null;
 
-            for(int i = 0; i < x; i++)
+            for(int i = 0; i < y; i++)
                 gridOutput += i + "   ";
+
+            gridOutput += "\n";
 
             for(int i = 0; i < x; i++)
             {
@@ -50,27 +63,50 @@ namespace Connect_Four
         }
 
         // draws grid
-        public void DrawGrid()
+        public void DrawGrid() { Console.WriteLine(OutputGrid()); }
+
+        public void ClearGrid() { InitialiseGrid(); }
+
+        public void MakeMove(int playerIndex, int y)
         {
-            Console.WriteLine(OutputGrid());
+            int x = this.x - 1;
+
+            if (CheckMove(ref x, y))
+                grid[x][y] = players.GetPlayerIcon(playerIndex);
+        }
+
+        bool CheckMove(ref int x, int y)
+        {
+            if (y >= 0 && y < this.y && grid[x][y] == gridIcon)
+                return true;
+
+            else 
+                for (int i = x; i >= 0; i--)
+                    if (grid[i][y] == gridIcon)
+                    {
+                        x = i;
+                        return true;
+                    } 
+
+            return false;
         }
 
         bool CheckSizes(int x, ref int y)
         {
             bool bConstraintSize = false;
 
-            if(x > 0 && x < 30) 
+            if(x > 3 && x < 30) 
                 bConstraintSize = true;
             
             if(y != -1)
-                if(y > 0 && y < 30)
-                    bConstraintSize = true;
-
-            else 
             {
-                bConstraintSize = true;
-                y = x;
+                if (y > 3 && y < 30)
+                    bConstraintSize = true;
             }
+                
+
+            else
+                y = x;
 
             return bConstraintSize;
         }
@@ -88,7 +124,15 @@ namespace Connect_Four
 
         void InitialiseGrid()
         {
+            grid = new char[x][];
 
+            for (int i = 0; i < x; i++)
+            {
+                grid[i] = new char[y];
+
+                for (int j = 0; j < y; j++)
+                    grid[i][j] = gridIcon;
+            }
         }
     }
 }
