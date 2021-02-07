@@ -34,15 +34,14 @@ namespace xUT
             for (int i = 0; i < 2; i++)
                 Assert.NotEqual(names[i], play.GetPlayerName(i));
 
-            Assert.Equal('X', play.GetPlayerIcon());
-
+            Assert.Equal('X', play.GetPlayerIcon(0));
         }
     }
 
     public class xUTGrid
     {
         [Fact]
-        public void GridTest()
+        public void GridSetupTest()
         {
             
         }
