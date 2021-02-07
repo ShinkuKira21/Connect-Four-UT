@@ -18,7 +18,7 @@ namespace xUT
             for(int i = 0; i < 2; i++)
                 Assert.Equal(names[i], play.GetPlayerName(i));
 
-            Assert.Equal('O', play.GetPlayerIcon());
+            Assert.Equal('O', play.GetPlayerIcon(0));
         }
 
         [Fact]
@@ -34,7 +34,7 @@ namespace xUT
             for (int i = 0; i < 2; i++)
                 Assert.NotEqual(names[i], play.GetPlayerName(i));
 
-            Assert.Equal('X', play.GetPlayerIcon());
+            Assert.Equal('X', play.GetPlayer1Icon());
 
         }
     }
