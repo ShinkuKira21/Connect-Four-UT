@@ -19,9 +19,9 @@ namespace Connect_Four
         {
             play = new Players(names, 'O');
 
-            // inverted
             play.SetPlayerName("James", 0);
             play.SetPlayerName("Wiliams", 1);
+
             play.SetPlayerIcon('X');
         }
 

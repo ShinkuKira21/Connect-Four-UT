@@ -36,6 +36,44 @@ namespace xUT
 
             Assert.Equal('X', play.GetPlayerIcon(0));
         }
+
+        [Fact]
+        public void PlayerConstructorIconConstraint()
+        {
+            // X will be selected as default if O is not chose
+            play = new Players(names, 'P');
+
+            Assert.NotEqual('P', play.GetPlayerIcon(0));
+            Assert.Equal('X', play.GetPlayerIcon(0));
+        }
+
+        [Fact]
+        public void PlayerEditIconConstraint()
+        {
+            // if player icon is changed to
+            // invalid character, then 
+            // no changes will be made.
+            play = new Players(names, 'O');
+
+            play.SetPlayerIcon('.');
+
+            Assert.NotEqual('.', play.GetPlayerIcon(0));
+            Assert.Equal('O', play.GetPlayerIcon(0));
+        }
+
+        [Fact]
+        public void Player2IconTest()
+        {
+            // Player 2 is the opposite
+            // piece to player 1
+            play = new Players(names, 'O');
+
+            Assert.Equal('X', play.GetPlayerIcon(1));
+
+            play.SetPlayerIcon('X');
+
+            Assert.Equal('O', play.GetPlayerIcon(1));
+        }
     }
 
     public class xUTGrid
