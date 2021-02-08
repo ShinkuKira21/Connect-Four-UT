@@ -14,14 +14,20 @@ namespace Connect_Four
             for (int i = 0; i < 2; i++)
                 this.playerNames[i] = playerNames[i];
 
-            this.p1Icon = p1Icon;
+            if (CheckPlayerIcon(p1Icon))
+                this.p1Icon = p1Icon;
+
+            else this.p1Icon = 'X'; // set as X if fail
         }
 
         public void SetPlayerName(string playerName, int sel)
         { playerNames[sel] = playerName; }
 
         public void SetPlayerIcon(char p1Icon)
-        { this.p1Icon = p1Icon; }
+        {
+            if (CheckPlayerIcon(p1Icon))
+                this.p1Icon = p1Icon;
+        }
 
         public string GetPlayerName(int sel)
         { return playerNames[sel]; }
@@ -34,6 +40,12 @@ namespace Connect_Four
                 if (p1Icon == 'X') return 'O';
                 else return 'X';
             }
+        }
+
+        bool CheckPlayerIcon(char icon)
+        {
+            if (icon == 'X' || icon == 'O') return true;
+            return false;
         }
     }
 }
