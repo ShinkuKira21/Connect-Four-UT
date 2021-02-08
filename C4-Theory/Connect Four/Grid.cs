@@ -6,6 +6,8 @@ namespace Connect_Four
     {
         protected Players players;
         protected char[][] grid;
+
+        // x = H and Y = W
         int x, y; // Grid size
         char gridIcon;
 
@@ -14,8 +16,8 @@ namespace Connect_Four
         {
             this.players = players;
 
-            x = 4;
-            y = 4;
+            x = 7;
+            y = 6;
 
             gridIcon = '.';
 
@@ -46,14 +48,17 @@ namespace Connect_Four
         {
             string gridOutput = null;
 
-            for(int i = 0; i < y; i++)
-                gridOutput += i + "   ";
+            gridOutput += "    ";
+
+            for (int i = 0; i < y; i++)
+                gridOutput += (i + 1) + "   ";
 
             gridOutput += "\n";
 
             for(int i = 0; i < x; i++)
             {
-                for(int j = 0; j < y; j++)
+                gridOutput += (i + 1) + "   ";
+                for (int j = 0; j < y; j++)
                     gridOutput += grid[i][j] + "   ";
 
                 gridOutput += "\n";
@@ -105,8 +110,7 @@ namespace Connect_Four
             }
                 
 
-            else
-                y = x;
+            else y = x;
 
             return bConstraintSize;
         }

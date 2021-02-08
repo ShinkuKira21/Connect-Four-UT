@@ -28,15 +28,14 @@ namespace Connect_Four
         static void GridSetup()
         {
             // default grid
-            grid = new Grid(ref play, 3, gridIcon: '-');
+            grid = new Grid(ref play);
 
             grid.DrawGrid();
 
-            grid.MakeMove(0, 0);
-
-            grid.DrawGrid();
-
-            grid.MakeMove(1, 1);
+            grid.MakeMove(0, 2);
+            grid.MakeMove(1, 2);
+            grid.MakeMove(0, 2);
+            grid.MakeMove(1, 2);
 
             grid.DrawGrid();
         }
