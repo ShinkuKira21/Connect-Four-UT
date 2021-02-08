@@ -5,28 +5,39 @@ namespace Connect_Four
     class Program
     {
         protected static string[] names =
-       { "John", "Mary" };
+        { "John", "Mary" };
         protected static Players play;
+        protected static Grid grid;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            PlayerSetup();
+            GridSetup();
+        }
 
+        static void PlayerSetup()
+        {
             play = new Players(names, 'O');
 
-            
-
             // inverted
-            play.SetPlayerName("Ma", 0);
-            play.SetPlayerName("Jo", 1);
+            play.SetPlayerName("James", 0);
+            play.SetPlayerName("Wiliams", 1);
             play.SetPlayerIcon('X');
+        }
 
-            for (int i = 0; i < 2; i++)
-                Console.Write(names[i] + ", ");
+        static void GridSetup()
+        {
+            // default grid
+            grid = new Grid(ref play);
 
-            Console.WriteLine();
+            grid.DrawGrid();
 
-            Console.WriteLine(play.GetPlayerName(0) + ", " + play.GetPlayerName(1));
+            grid.MakeMove(0, 2);
+            grid.MakeMove(1, 2);
+            grid.MakeMove(0, 2);
+            grid.MakeMove(1, 2);
+
+            grid.DrawGrid();
         }
     }
 }

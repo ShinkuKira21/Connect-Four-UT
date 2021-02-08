@@ -26,7 +26,14 @@ namespace Connect_Four
         public string GetPlayerName(int sel)
         { return playerNames[sel]; }
 
-        public char GetPlayerIcon()
-        { return p1Icon; }
+        public char GetPlayerIcon(int sel)
+        { 
+            if(sel == 0) return p1Icon;
+            else
+            {
+                if (p1Icon == 'X') return 'O';
+                else return 'X';
+            }
+        }
     }
 }
