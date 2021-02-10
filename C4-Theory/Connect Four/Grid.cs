@@ -43,6 +43,15 @@ namespace Connect_Four
         public char GetGridIcon()
         { return gridIcon; }
 
+        public char[][] GetGrid()
+        { return grid; }
+
+        public int GetXSize()
+        { return x; }
+
+        public int GetYSize()
+        { return y; }
+
         //  returns string of grid.
         public string OutputGrid()
         {
@@ -74,7 +83,7 @@ namespace Connect_Four
 
         public void MakeMove(int playerIndex, int y)
         {
-            int x = this.x - 1;
+            int x = (this.x - 1);
 
             if (CheckMove(ref x, y))
                 grid[x][y] = players.GetPlayerIcon(playerIndex);
@@ -82,17 +91,19 @@ namespace Connect_Four
 
         bool CheckMove(ref int x, int y)
         {
-            if (y >= 0 && y < this.y && grid[x][y] == gridIcon)
-                return true;
+            if(y >= 0 && y < this.y && x >= 0 && x < this.x)
+            {
+                if (grid[x][y] == gridIcon)
+                    return true;
 
-            else 
                 for (int i = x; i >= 0; i--)
                     if (grid[i][y] == gridIcon)
                     {
                         x = i;
                         return true;
-                    } 
-
+                    }
+            }
+            
             return false;
         }
 
