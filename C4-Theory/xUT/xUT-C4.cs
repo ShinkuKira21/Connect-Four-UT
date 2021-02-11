@@ -211,4 +211,205 @@ namespace xUT
             return validationGrid;
         }
     }
+
+    public class xUTGameStatus
+    {
+        protected string[] names =
+       { "John", "Mary" };
+
+        protected Players play;
+        protected Grid grid;
+        protected GameStatus gs;
+
+        [Fact]
+        public void VerticalMoveWinCheck()
+        {
+            play = new Players(names, 'X');
+            grid = new Grid(ref play);
+            gs = new GameStatus(ref play, ref grid);
+
+            VerticalMove(1, 0);
+
+            // if winner is John
+            Assert.False(gs.GetGameStatus()); // this updates the winner (if false gameOver)
+            Assert.Equal(1, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            VerticalMove();
+            Assert.False(gs.GetGameStatus());
+            Assert.Equal(0, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            VerticalMove(bWinGame: false);
+            Assert.True(gs.GetGameStatus()); // No winner, Game Continuing
+        }
+
+        [Fact]
+        public void HorizontalMoveWinCheck()
+        {
+            play = new Players(names, 'X');
+            grid = new Grid(ref play);
+            gs = new GameStatus(ref play, ref grid);
+
+            HorizontalMove(1, 0);
+
+            // if winner is John
+            Assert.False(gs.GetGameStatus()); // this updates the winner (if false gameOver)
+            Assert.Equal(1, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            HorizontalMove();
+            Assert.False(gs.GetGameStatus());
+            Assert.Equal(0, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            HorizontalMove(bWinGame: false);
+            Assert.True(gs.GetGameStatus()); // No winner, Game Continuing
+        }
+
+        [Fact]
+        public void DiagonalTLBRMoveWinCheck()
+        {
+            play = new Players(names, 'X');
+            grid = new Grid(ref play);
+            gs = new GameStatus(ref play, ref grid);
+
+            DiagonalTLBRMove(1, 0);
+
+            // if winner is John
+            Assert.False(gs.GetGameStatus()); // this updates the winner (if false gameOver)
+            Assert.Equal(1, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            DiagonalTLBRMove();
+            Assert.False(gs.GetGameStatus());
+            Assert.Equal(0, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            DiagonalTLBRMove(bWinGame: false);
+            Assert.True(gs.GetGameStatus()); // No winner, Game Continuing
+        }
+
+        [Fact]
+        public void DiagonalTRBLMoveCheck()
+        {
+            play = new Players(names, 'X');
+            grid = new Grid(ref play);
+            gs = new GameStatus(ref play, ref grid);
+
+            DiagonalTRBLMove(1, 0);
+
+            // if winner is John
+            Assert.False(gs.GetGameStatus()); // this updates the winner (if false gameOver)
+            Assert.Equal(1, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            DiagonalTRBLMove();
+            Assert.False(gs.GetGameStatus());
+            Assert.Equal(0, gs.GetWinner());
+
+            grid.ClearGrid();
+
+            DiagonalTRBLMove(bWinGame: false);
+            Assert.True(gs.GetGameStatus()); // No winner, Game Continuings
+        }
+
+        void VerticalMove(int winner = 0, int loser = 1, bool bWinGame = true)
+        {
+            // Debug Vertical 
+            int horizontal = 5;
+            grid.MakeMove(loser, horizontal);
+            grid.MakeMove(loser, horizontal);
+            grid.MakeMove(loser, horizontal);
+            grid.MakeMove(winner, horizontal);
+            grid.MakeMove(winner, horizontal);
+            grid.MakeMove(winner, horizontal);
+            if(bWinGame) grid.MakeMove(winner, horizontal);
+        }
+
+        void HorizontalMove(int winner = 0, int loser = 1, bool bWinGame = true)
+        {
+            // Debug Horizontal 
+            grid.MakeMove(loser, 0);
+            grid.MakeMove(winner, 1);
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(winner, 3);
+            grid.MakeMove(loser, 4);
+            grid.MakeMove(winner, 5);
+
+            grid.MakeMove(loser, 0);
+            grid.MakeMove(loser, 1);
+            grid.MakeMove(winner, 2);
+            grid.MakeMove(winner, 3);
+            grid.MakeMove(winner, 4);
+            if(bWinGame) grid.MakeMove(winner, 5);
+        }
+
+        void DiagonalTLBRMove(int winner = 0, int loser = 1, bool bWinGame = true)
+        {
+            //Debug Diagonal TL-BR
+            grid.MakeMove(loser, 0);
+            grid.MakeMove(winner, 0);
+            grid.MakeMove(winner, 0);
+            grid.MakeMove(loser, 0);
+            grid.MakeMove(winner, 0);
+            grid.MakeMove(winner, 0);
+            grid.MakeMove(winner, 0);
+
+            grid.MakeMove(winner, 1);
+            grid.MakeMove(winner, 1);
+            grid.MakeMove(winner, 1);
+            grid.MakeMove(loser, 1);
+            grid.MakeMove(loser, 1);
+            if(bWinGame) grid.MakeMove(winner, 1);
+
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(winner, 2);
+            grid.MakeMove(winner, 2);
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(winner, 2);
+
+            grid.MakeMove(loser, 3);
+            grid.MakeMove(loser, 3);
+            grid.MakeMove(loser, 3);
+            grid.MakeMove(winner, 3);
+        }
+
+        void DiagonalTRBLMove(int winner = 0, int loser = 1, bool bWinGame = true)
+        {
+            //Debug Diagonal TR-BL
+            grid.MakeMove(loser, 5);
+            grid.MakeMove(winner, 5);
+            grid.MakeMove(winner, 5);
+            grid.MakeMove(loser, 5);
+            grid.MakeMove(winner, 5);
+            grid.MakeMove(winner, 5);
+            grid.MakeMove(winner, 5);
+
+            grid.MakeMove(winner, 4);
+            grid.MakeMove(winner, 4);
+            grid.MakeMove(winner, 4);
+            grid.MakeMove(loser, 4);
+            grid.MakeMove(loser, 4);
+            if (bWinGame) grid.MakeMove(winner, 4);
+
+            grid.MakeMove(loser, 3);
+            grid.MakeMove(winner, 3);
+            grid.MakeMove(winner, 3);
+            grid.MakeMove(loser, 3);
+            grid.MakeMove(winner, 3);
+
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(loser, 2);
+            grid.MakeMove(winner, 2);
+        }
+    }
 }
