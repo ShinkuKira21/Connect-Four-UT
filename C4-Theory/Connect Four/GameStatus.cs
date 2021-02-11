@@ -55,26 +55,6 @@ namespace Connect_Four
                 if (count == 4)
                     return i;
 
-                // Check Diagnonals TR - BL
-                //for (int j = 0; j < this.grid.GetXSize(); j++)
-                //{
-                //    count = 0;
-                //    for (int k = 0; k < this.grid.GetYSize() - 3; k++)
-                //    {
-                //        if (j == k)
-                //        {
-                //            if (count == 4)
-                //                return i;
-
-                //            if (grid[j][k] == playerIcons[i] && grid[j - 1][k + 1] == playerIcons[i] && grid[j - 2][k + 2] == playerIcons[i] && grid[j - 3][k + 3] == playerIcons[i]) count++;
-                //            else count = 0;
-                //        }
-                //    }
-                //}
-
-                //if (count == 4)
-                //    return i;
-
                 // Check Straight D-U
                 for (int j = 0; j < this.grid.GetYSize(); j++)
                 {

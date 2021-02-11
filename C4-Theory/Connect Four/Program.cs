@@ -60,7 +60,7 @@ namespace Connect_Four
             //grid.MakeMove(1, 5);
 
             //Debug Diagonal TL-BR
-            //grid.MakeMove(0, 0);
+            //grid.MakeMove(1, 0);
             //grid.MakeMove(0, 0);
             //grid.MakeMove(0, 0);
             //grid.MakeMove(1, 0);
@@ -73,7 +73,7 @@ namespace Connect_Four
             //grid.MakeMove(0, 1);
             //grid.MakeMove(1, 1);
             //grid.MakeMove(1, 1);
-            //grid.MakeMove(1, 1);
+            //grid.MakeMove(0, 1);
 
             //grid.MakeMove(1, 2);
             //grid.MakeMove(0, 2);
@@ -87,31 +87,31 @@ namespace Connect_Four
             //grid.MakeMove(0, 3);
 
             //Debug Diagonal TR - BL
-            grid.MakeMove(1, 5);
-            grid.MakeMove(0, 5);
-            grid.MakeMove(0, 5);
-            grid.MakeMove(1, 5);
-            grid.MakeMove(0, 5);
-            grid.MakeMove(0, 5);
-            grid.MakeMove(0, 5);
+            //grid.MakeMove(1, 5);
+            //grid.MakeMove(0, 5);
+            //grid.MakeMove(0, 5);
+            //grid.MakeMove(1, 5);
+            //grid.MakeMove(0, 5);
+            //grid.MakeMove(0, 5);
+            //grid.MakeMove(0, 5);
 
-            grid.MakeMove(0, 4);
-            grid.MakeMove(0, 4);
-            grid.MakeMove(0, 4);
-            grid.MakeMove(1, 4);
-            grid.MakeMove(1, 4);
-            grid.MakeMove(0, 4);
+            //grid.MakeMove(0, 4);
+            //grid.MakeMove(0, 4);
+            //grid.MakeMove(0, 4);
+            //grid.MakeMove(1, 4);
+            //grid.MakeMove(1, 4);
+            //grid.MakeMove(0, 4);
 
-            grid.MakeMove(1, 3);
-            grid.MakeMove(0, 3);
-            grid.MakeMove(0, 3);
-            grid.MakeMove(1, 3);
-            grid.MakeMove(0, 3);
+            //grid.MakeMove(1, 3);
+            //grid.MakeMove(0, 3);
+            //grid.MakeMove(0, 3);
+            //grid.MakeMove(1, 3);
+            //grid.MakeMove(0, 3);
 
-            grid.MakeMove(0, 2);
-            grid.MakeMove(1, 2);
-            grid.MakeMove(1, 2);
-            grid.MakeMove(0, 2);
+            //grid.MakeMove(0, 2);
+            //grid.MakeMove(1, 2);
+            //grid.MakeMove(1, 2);
+            //grid.MakeMove(0, 2);
 
             grid.DrawGrid();
         }
