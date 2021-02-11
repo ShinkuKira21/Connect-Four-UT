@@ -36,40 +36,59 @@ namespace Connect_Four
 
             for(int i = 0; i < 2; i++)
             {
-                // Check Diagonals 
-                for (int j = 0; j < this.grid.GetXSize(); j++)
-                {
-                    count = 0;
-                    for (int k = 0; k < this.grid.GetYSize(); k++)
-                    {
-                        if (j == k)
-                        {               
-                            if (count == 4)
-                                return i;
+                count = 0;
 
-                            if (grid[j][k] == playerIcons[i]) count++;
-                            else count = 0;
-                        }
-                    }
-                }
+                // Check Diagonals TL - BR
+                for (int j = 0; j < this.grid.GetXSize() - 3; j++)
+                    for (int k = 0; k < this.grid.GetYSize() - 3; k++)
+                        if (grid[j][k] == playerIcons[i] && grid[j][k] == grid[j + 1][k + 1] && grid[j][k] == grid[j + 2][k + 2] && grid[j][k] == grid[j + 3][k + 3]) count = 4;
 
                 if (count == 4)
                     return i;
 
-                    // Check Straight D-U
-                    for (int j = 0; j < this.grid.GetYSize(); j++)
-                    {
-                        count = 0;
-                        for (int k = 0; k < this.grid.GetXSize(); k++)
-                        {  
-                            //Check within loop (Internal)
-                            if (count == 4)
-                                return i;
+                // Check Diagonals TR - BL
+                for (int j = 0; j < this.grid.GetXSize(); j++)
+                    for (int k = 0; k < this.grid.GetYSize(); k++)
+                        if(j + 3 < this.grid.GetXSize() && k - 3 >= 0)
+                            if (grid[j][k] == playerIcons[i] && grid[j][k] == grid[j + 1][k - 1] && grid[j][k] == grid[j + 2][k - 2] && grid[j][k] == grid[j + 3][k - 3]) count = 4;
 
-                            if (grid[k][j] == playerIcons[i]) count++;
-                            else count = 0;
-                        }
+                if (count == 4)
+                    return i;
+
+                // Check Diagnonals TR - BL
+                //for (int j = 0; j < this.grid.GetXSize(); j++)
+                //{
+                //    count = 0;
+                //    for (int k = 0; k < this.grid.GetYSize() - 3; k++)
+                //    {
+                //        if (j == k)
+                //        {
+                //            if (count == 4)
+                //                return i;
+
+                //            if (grid[j][k] == playerIcons[i] && grid[j - 1][k + 1] == playerIcons[i] && grid[j - 2][k + 2] == playerIcons[i] && grid[j - 3][k + 3] == playerIcons[i]) count++;
+                //            else count = 0;
+                //        }
+                //    }
+                //}
+
+                //if (count == 4)
+                //    return i;
+
+                // Check Straight D-U
+                for (int j = 0; j < this.grid.GetYSize(); j++)
+                {
+                    count = 0;
+                    for (int k = 0; k < this.grid.GetXSize(); k++)
+                    {  
+                        //Check within loop (Internal)
+                        if (count == 4)
+                            return i;
+
+                        if (grid[k][j] == playerIcons[i]) count++;
+                        else count = 0;
                     }
+                }
 
                 // Check after loop (External)
                 if (count == 4)
@@ -90,9 +109,7 @@ namespace Connect_Four
 
                 if (count == 4)
                     return i;
-            }
-                       
-                        
+            }    
 
             return -1; // No Winner Determined
         }
