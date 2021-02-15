@@ -1,3 +1,5 @@
+/* Author: Edward Patch */
+
 using System;
 
 namespace Connect_Four 
