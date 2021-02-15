@@ -1,4 +1,4 @@
-using System;
+/* Author: Edward Patch */
 
 namespace Connect_Four
 {

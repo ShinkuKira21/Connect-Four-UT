@@ -1,4 +1,6 @@
-using System;
+/* Author: Edward Patch */
+
+
 using Xunit;
 using Connect_Four;
 
@@ -411,5 +413,10 @@ namespace xUT
             grid.MakeMove(loser, 2);
             grid.MakeMove(winner, 2);
         }
+    }
+
+    class xUTVBlockMoveTheory
+    {
+
     }
 }
