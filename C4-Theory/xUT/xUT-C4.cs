@@ -217,7 +217,7 @@ namespace xUT
     public class xUTGameStatus
     {
         protected string[] names =
-       { "John", "Mary" };
+        { "John", "Mary" };
 
         protected Players play;
         protected Grid grid;
@@ -415,8 +415,139 @@ namespace xUT
         }
     }
 
-    class xUTVBlockMoveTheory
+    public class xUTVBlockMoveTheory
     {
+        protected string[] names =
+       { "John", "Mary" };
 
+        protected Players play;
+        protected Grid grid;
+
+        protected char[][] board;
+
+        [Fact]
+        public void VerticalElimination()
+        {
+            // Scenario Tests : Vertical Block Strategy | Reference: 
+            // Software Engineering, Author: Edward Patch
+            // Section III-C, Vertical Strategy - Plan A.
+
+            play = new Players(names, 'X');
+            grid = new Grid(ref play);
+            board = grid.GetGrid();
+            VerticalMove();
+
+            Assert.True(EliminateMove(board));
+        }
+
+        void VerticalMove(int horizontal = 0, int player1 = 0, int player2 = 1)
+        {
+            // Debug Vertical 
+            grid.MakeMove(player2, horizontal);
+            grid.MakeMove(player2, horizontal);
+            grid.MakeMove(player2, horizontal);
+            grid.MakeMove(player1, 3);
+
+            if(horizontal + 2 < grid.GetYSize())
+            {
+                grid.MakeMove(player1, horizontal + 1);
+                grid.MakeMove(player1, horizontal + 2);
+            }
+        }
+
+        bool EliminateMove(char[][] board)
+        {
+            // Two problems with these methods are dropping pieces higher than 1 row,
+            // and XOXX (won't swipe) but XXXO will (Solution:
+            // Count system where only swipe if there is a gap of two for example
+            // XO-X (will return to naught) or XOXO will only count to two.
+
+            // Another problem with this method,
+            // if XOX- exists and for argument sake, player X puts another piece
+            // XOXX (it will currently swipe if called in a looping system)
+            // The function will have to know which turn is whos.
+            
+            // Vertical Block
+            for (int i = 0; i < grid.GetXSize(); i++)
+                for (int j = 0; j < grid.GetYSize(); j++)
+                    if (i + 3 < grid.GetXSize())
+                        if (board[i][j] == board[i + 1][j] && board[i][j] == board[i+2][j] && board[i][j] != board[i+3][j] && board[i+3][j] != grid.GetGridIcon())
+                        {
+                            board[i][j] = board[i+3][j];
+                            board[i + 1][j] = grid.GetGridIcon();
+                            board[i + 2][j] = grid.GetGridIcon();
+
+                            return true;
+                        }
+
+            // Horrizontal Block
+            for (int i = 0; i < grid.GetXSize(); i++)
+                for (int j = 0; j < grid.GetYSize(); j++)
+                    if (j + 3 < grid.GetYSize())
+                        if (board[i][j] == board[i][j + 1] && board[i][j] == board[i][j + 2] && board[i][j] != board[i][j + 3] && board[i][j + 3] != grid.GetGridIcon())
+                        {
+                            // this will only drop the layer above only
+                            // solution: would need a external function to check
+                            // if there is nothing above the gridIcon.
+
+                            board[i][j] = board[i-1][j];
+                            board[i][j + 1] = board[i-1][j];
+                            board[i][j + 2] = board[i-1][j];
+
+                            return true;
+                        }
+
+            // Diagonal Block TR - BL - Plan B
+            for (int i = 0; i < grid.GetXSize(); i++)
+                for (int j = 0; j < grid.GetYSize(); j++)
+                    if (i + 3 < grid.GetXSize() && j - 3 >= 0)
+                        if (board[i][j] == board[i + 1][j - 1] && board[i][j] == board[i + 2][j - 2] && board[i][j] != board[i + 3][j - 3] && board[i+3][j-3] == grid.GetGridIcon())
+                        {
+                            /* Not too sure here ||
+                             * Here's my theory -
+                             * The coordinates below will be reset to grid Icon 
+                             * or upper piece
+                             * x:0, x:1, x:3
+                             * y:3, y:2, y:0
+                             * 
+                             * The coordinates below will drop to above pieces
+                             * x:2 -> x:3, x:0 -> x:1
+                             * y:0 -> y:0, y:2 -> y:2
+                             */
+
+                            // only gets upper row (it's broken logic)
+                            board[i][j] = board[i - 1][j];
+                            board[i][j + 1] = board[i - 1][j + 1];
+                            board[i][j + 2] = board[i - 1][j + 2];
+
+                            return true;
+                        }
+
+            // Diagonal Block TL - BR - Plan A
+            for (int i = 0; i < grid.GetXSize(); i++)
+                for (int j = 0; j < grid.GetYSize(); j++)
+                    if (board[i][j] == board[i + 1][j + 1] && board[i][j] == board[i + 2][j + 2] && board[i][j] != board[i + 3][j + 3] && board[i + 3][j + 3] == grid.GetGridIcon())
+                    {
+                        /* Not too sure here ||
+                            * Here's my theory -
+                            * The coordinates below will be reset to grid Icon 
+                            * or upper piece
+                            * x:0, x:1, x:3
+                            * y:3, y:2, y:0
+                            * 
+                            * The coordinates below will drop to above pieces
+                            * x:2 -> x:3, x:0 -> x:1
+                            * y:0 -> y:0, y:2 -> y:2
+                            */
+
+                        // only gets upper row
+                        board[i][j] = board[i - 1][j];
+                        board[i + 1][j + 1] = board[i - 1][j];
+                        board[i + 2][j + 2] = board[i - 1][j];
+                        return true;
+                    }
+
+            return false;
+        }
     }
 }
