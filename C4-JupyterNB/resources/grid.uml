@@ -1,0 +1,4 @@
+@startuml
+    Alice -> x
+    Bob --> Alice: Authentication Response
+@enduml

@@ -7,7 +7,7 @@ namespace Connect_Four
         protected Players players;
         protected char[] playerIcons;
         protected Grid grid;
-        public int winnerIndex;
+        protected int winnerIndex;
 
         public GameStatus(ref Players players, ref Grid grid)
         {
