@@ -362,3 +362,6 @@ MigrationBackup/
 FodyWeavers.xsd
 *.zip
 .vscode/launch.json
+
+# Custom
+.ibynb_checkpoints/
